@@ -30,7 +30,7 @@ const Button = styled.button`
 const Login = () => {
   const handleClick = () => {
     const clientId = "5340d1c4fa9f47f3a6557d43509ab4f0";
-    const redirectUri = 'http://localhost:5173/';
+    const redirectUri = 'https://music-app-bytewise.netlify.app/';
     const apiUrl = "https://accounts.spotify.com/authorize";
     const scope = [
       "user-read-email",
