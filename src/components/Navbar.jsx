@@ -12,7 +12,7 @@ const Container = styled.div`
   position: sticky;
   top: 0;
   transition: 0.3s ease-in-out;
-  background-color: transparent;
+  background-color: ${({navBg})=>navBg ? "rgba(0,0,0,0.7)" : "transparent"};
   .search__bar {
     background-color: #fff;
     width: 40%;
@@ -57,13 +57,13 @@ const Container = styled.div`
   }
 `;
 
-const Navbar = () => {
+const Navbar = ({navBg}) => {
   const {
     state: { userInfo },
   } = useStateProvider();
 
   return (
-    <Container>
+    <Container navBg={navBg}>
       <div className="search__bar">
         <FaSearch />
         <input type="text" placeholder="Artists, songs or podcasts" />
@@ -71,7 +71,9 @@ const Navbar = () => {
       <div className="avatar">
         <a href="#">
           <CgProfile />
-          <span>{userInfo?.userName}</span>
+          <span>
+            {userInfo?.userName ? userInfo?.userName : "Guest"}
+          </span>
         </a>
       </div>
     </Container>

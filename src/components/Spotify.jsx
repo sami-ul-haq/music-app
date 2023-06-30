@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useState } from "react";
+import { useRef } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
 import { reducerCase } from "../utils/constants";
@@ -27,11 +29,26 @@ const Container = styled.div`
       height: 100%;
       width: 100%;
       overflow: auto;
+      &::-webkit-scrollbar {
+        width: 0.7rem;
+        &-thumb {
+          background-color: rgba(255, 255, 255, 0.6);
+        }
+      }
     }
   }
 `;
 
 const Spotify = () => {
+  const [navBg, setNavBg] = useState(false);
+  const [headerBg, setHeaderBg] = useState(false);
+  const bodyRef = useRef();
+
+  const bodySccrolled = () => {
+    bodyRef.current.scrollTop >= 30 ? setNavBg(true) : setNavBg(false);
+    bodyRef.current.scrollTop >= 268 ? setHeaderBg(true) : setHeaderBg(false);
+  };
+
   const {
     state: { token },
     dispatch,
@@ -66,10 +83,10 @@ const Spotify = () => {
     <Container>
       <div className="spotify_body">
         <Sidebar />
-        <div className="body">
-          <Navbar />
+        <div className="body" ref={bodyRef} onScroll={bodySccrolled}>
+          <Navbar navBg={navBg} />
           <div className="body-contents">
-            <Body />
+            <Body headerBg={headerBg} />
           </div>
         </div>
       </div>

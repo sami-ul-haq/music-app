@@ -34,6 +34,7 @@ const Container = styled.div`
         align-items: center;
         gap: 1rem;
         transition: 0.3s ease-in-out;
+        cursor: pointer;
         &:hover{
           color: #fff;
         }

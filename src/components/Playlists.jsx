@@ -7,33 +7,34 @@ import { useStateProvider } from "../utils/StateProvider";
 const Container = styled.div`
   height: 100%;
   overflow: hidden;
-  h2{
+  h2 {
     font-size: 1.2rem;
     padding: 1rem 1rem 0.5rem;
   }
-ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-  height: 52vh;
-  max-height: 100%;
-  overflow: auto;
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    height: 52vh;
+    max-height: 100%;
+    overflow: auto;
 
-  &::-webkit-scrollbar{
-    width: 0.7rem;
-    &-thumb{
-      background-color: rgba(255,255,255,0.6);
+    &::-webkit-scrollbar {
+      width: 0.7rem;
+      &-thumb {
+        background-color: rgba(255, 255, 255, 0.6);
+      }
+    }
+    li {
+      transition: 0.3s ease-in-out;
+      cursor: pointer;
+      &:hover {
+        color: #fff;
+      }
     }
   }
-  li{
-    transition: 0.3s ease-in-out;
-    &:hover{
-      color: #fff;
-    }
-  }
-}
 `;
 
 const Playlists = () => {
@@ -71,12 +72,19 @@ const Playlists = () => {
     console.log("I run: Get play list data");
   }, [token]);
 
+  const changePlaylist = (playlistId) => {
+    dispatch({
+      type: reducerCase.SET_PLAYLIST_ID,
+      payload: playlistId,
+    });
+  };
+
   return (
     <Container>
       <h2>Playlists</h2>
       <ul>
-        {playlists?.map((item,i) => (
-          <li key={i}>{item.name}</li>
+        {playlists?.map((item, i) => (
+          <li key={i} onClick={()=>changePlaylist(item.id)}>{item.name}</li>
         ))}
       </ul>
     </Container>
